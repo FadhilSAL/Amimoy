@@ -424,7 +424,7 @@ setTimeout(()=>{e.target.classList.remove('hidden')
           {product.diskon ? (
             <span
             id="hargaDiskon"
-              className="absolute xs:right-20 md:right-30 lg:right-50 top-31 font-inter text-xl "
+              className="absolute xs:right-44 xs:top-91 md:top-31 md:right-30 lg:right-50 top-31 font-inter text-xl "
             >
               Rp{product.diskon}
             </span>
