@@ -67,7 +67,7 @@ export default function App() {
         <div className="flex justify-between mt-3 px-2 " id="menu">
           <div className="flex justify-center flex-wrap w-27 text-center hover:cursor-pointer">
             <img
-              src="/Amimoy/vegetable.png"
+              src='/Amimoy/vegetable.png'
               alt="veget"
               className="w-15 h-15 lg:w-25 lg:h-25"
             />
@@ -75,7 +75,7 @@ export default function App() {
           </div>
           <div className="flex justify-center flex-wrap w-27 text-center hover:cursor-pointer">
             <img
-              src="/tool.png"
+              src='/Amimoy/tool.png'
               alt="tool"
               className="w-15 h-15  lg:w-25 lg:h-25"
             />
@@ -83,7 +83,7 @@ export default function App() {
           </div>
           <div className="flex justify-center flex-wrap w-27 text-center hover:cursor-pointer">
             <img
-              src="/electronics.png"
+              src="/Amimoy/electronics.png"
               alt="electro"
               className="w-15 h-15 lg:w-25 lg:h-25"
               />
@@ -91,7 +91,7 @@ export default function App() {
           </div>
           <div className="flex justify-center flex-wrap w-27 text-center hover:cursor-pointer">
             <img
-              src="/laundry.png"
+              src="/Amimoy/laundry.png"
               alt="clothes"
               className="w-15 h-15 lg:w-25 lg:h-25"
             />
@@ -157,7 +157,7 @@ function deleteProductCart(){
 return (
   <nav className="p-5 flex justify-between w-full relative overflow-x-clip">
       <div className="flex">
-        <img src="/icon.png" alt="ikon" className="w-8 h-8" />
+        <img src="/Amimoy/icon.png" alt="ikon" className="w-8 h-8" />
         <h1 className="text-2xl font-oswald tracking-widest">Amimoy</h1>
       </div>
       <div className="w-60 mr-3  flex justify-end">
@@ -167,7 +167,7 @@ return (
           onClick={(e)=>keranjang(e)}
           >
           <img
-            src="/cart.png"
+         src={`/Amimoy/cart.png`}
             alt="cart"
             className="w-12 h-12  hover:opacity-80"
             />
@@ -180,7 +180,7 @@ return (
         <ul className={`bg-white overflow-y-scroll h-90 even:bg-slate-200 ${cart[0] == ''|| cart.length == 0? 'flex justify-center items-center ' :""  }`}>
 
           {cart[0] == ''|| cart.length == 0? <div className="flex flex-wrap justify-center">
-            <img src="/pngegg.png" alt="halo" className="w-25 h-25 opacity-80 "/> 
+            <img src="/Amimoy/pngegg.png" alt="halo" className="w-25 h-25 opacity-80 "/> 
             <h2 className="w-full text-center font-inter text-gray-500  ">Keranjang Kosong</h2>
           </div>
           :
@@ -189,7 +189,7 @@ return (
             return(
 
             <li className={`flex items-center justify-between py-4 px-2 ${(index+1) % 2 !== 0 ? "bg-stone-100":"bg-white"}`} key={itmCart.id}>
-              <img src={itmCart.url} alt="product" className="w-12 h-12" />
+              <img src={'/Amimoy/'+itmCart.url} alt="product" className="w-12 h-12" />
               <p className="font-inter  ">{itmCart.nama}</p>
               <span className="font-inter">{itmCart.harga}</span>
               <input type="checkbox" name="checkout" className="w-5 h-5" checked={itmCart.checked} onChange={(e)=>pilihSalahSatu(itmCart.id,index)} />
@@ -248,8 +248,24 @@ const [status , setStatus] = useState("hidden")
   setStatus("")
 
   const element = document.getElementById(id);
-element.classList.remove('hidden')
-e.target.classList.add('hidden')
+  const el2 = '.a'+id
+  let element2;
+  if(!isHidden){
+
+   element2 = document.querySelector(el2);
+   if(element2.classList.contains('a'+id)){
+   
+     element2.classList.remove('hidden')
+     e.target.classList.add('hidden')
+   }
+  }
+  console.log(element2);
+
+  element.classList.remove('hidden')
+  e.target.classList.add('hidden')
+
+console.log(element);
+
 
     const [filtered] = item.filter((itm) => itm.id_ == id);
     
@@ -257,7 +273,11 @@ e.target.classList.add('hidden')
  
 setTimeout(()=>{e.target.classList.remove('hidden')
   setStatus('hidden');
-  element.classList.add('hidden')
+  element.classList.add('hidden');
+  if(!isHidden){
+
+    element2.classList.add('hidden');
+  }
 },1000)
 
 
@@ -329,7 +349,7 @@ setTimeout(()=>{e.target.classList.remove('hidden')
                 )}
 
                 <img
-                  src={itm.urlGambarProduk}
+                  src={'/Amimoy'+itm.urlGambarProduk}
                   alt="tomat"
                   className="h-[160px] w-[208px]"
                 />
@@ -360,14 +380,14 @@ setTimeout(()=>{e.target.classList.remove('hidden')
                     Beli Sekarang
                   </button>
                <img
-                    src="/cart.png"
+                    src="/Amimoy/cart.png"
                     alt="cartAdd"
                     className="w-13 h-13 hover:cursor-pointer"
                     onClick={(e) => tambahKeranjang(itm.id_,e)}
                 
                     />
 
-                 <img src="/check.png" className="w-13 h-13 hidden" id={itm.id_}/>
+                 <img src="/Amimoy/check.png" className="w-13 h-13 hidden" id={itm.id_}/>
                 </div>
               </div>
             );
@@ -377,23 +397,23 @@ setTimeout(()=>{e.target.classList.remove('hidden')
      
 {/*status*/}
 
-<div className={`${status?status:'fixed'} bg-white rounded-xl z-99999999 top-50 left-1/2 w-40  h-32 ring-1 ring-black -translate-x-11 flex justify-center flex-wrap p-2`}>
-<img src="/check.png" alt="check" />
+<div className={`${status?status:'fixed'} bg-white rounded-xl z-99999999999999 top-50 left-1/2 w-40  h-32 ring-1 ring-black -translate-x-11 flex justify-center flex-wrap p-2`}>
+<img src="/Amimoy/check.png" alt="check" />
  <p className="text-xs font-inter text-center">Berhasil Ditambahkan Ke Keranjang</p>
 </div>
 
 
       </section>
       <div
-        className={`fixed   w-full p-10   top-10  w-full z-99999999   rounded-lg  duration-400 overflow-y-hidden ${isHidden ? " -translate-y-180" : ""} `}
+        className={`fixed   w-full p-10   top-10  w-full z-99999999   rounded-lg  duration-400  ${isHidden ? " -translate-y-180" : ""} `}
       >
         <div
-          className={`bg-stone-100 w-full h-120 relative rounded-xl duration-400  ${isHidden ? " -translate-y-150" : ""} shadow-2xl p-8`}
+          className={`bg-stone-100 w-full h-120 h-100 relative rounded-xl duration-400  ${isHidden ? " -translate-y-150" : ""} shadow-2xl p-8`}
           >
           {product.diskon ? (
             <span
             id="hargaDiskon"
-              className="absolute right-70 top-31 font-inter text-xl "
+              className="absolute xs:right-20 md:right-30 lg:right-50 top-31 font-inter text-xl "
             >
               Rp{product.diskon}
             </span>
@@ -406,9 +426,9 @@ setTimeout(()=>{e.target.classList.remove('hidden')
           >
             x
           </span>
-          <div className="flex w-full justify-between">
-            <div className="w-120 h-120 ">
-              <img src={product.urlGambarProduk} alt="item" className="h-100" />
+          <div className="flex w-full justify-between  ">
+            <div className=" md:w-120 md:h-120 xs:w-80 xs:h-80">
+              <img src={"/Amimoy/"+product.urlGambarProduk} alt="item" className="md:h-100 xs:h-60" />
             </div>
             <div className="w-120 h-120 mt-8">
               <h1 className="font-inter text-2xl">
@@ -428,11 +448,12 @@ setTimeout(()=>{e.target.classList.remove('hidden')
                     Checkout
                   </button>
                   <img
-                    src="/cart.png"
+                    src="/Amimoy/cart.png"
                     alt="cartAdd"
                     className="w-13 h-13 hover:cursor-pointer "
                     onClick={(e)=>tambahKeranjang(product.id_,e)}
                   />
+                    <img src="/Amimoy/check.png" className={`w-13 h-13 hidden ${'a'+product.id_}`}/>
                 </div>
                 <p className="font-inter">{product.deskripsi}</p>
               </div>
