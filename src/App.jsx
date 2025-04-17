@@ -18,7 +18,7 @@ const item = [
     satuan: "",
     hargaSatuUnit: "35.000",
     urlGambarProduk: "/wrench2.png",
-    deskripsi: "lorem ipsum",
+    deskripsi: "Kunci  adalah alat serbaguna yang digunakan untuk mengencangkan atau melepaskan baut, mur, atau sekrup. Kunci inggris dapat disesuaikan ukurannya dengan ukuran baut atau mur , tersedia nomor 24/27",
     diskon: "",
   },
   {
@@ -257,13 +257,18 @@ const [status , setStatus] = useState("hidden")
    
      element2.classList.remove('hidden')
      e.target.classList.add('hidden')
+    
    }
   }
+  else{
+
+    element.classList.remove('hidden')
+    e.target.classList.add('hidden')
+
+  }
+  
+  
   console.log(element2);
-
-  element.classList.remove('hidden')
-  e.target.classList.add('hidden')
-
 console.log(element);
 
 
@@ -397,7 +402,7 @@ setTimeout(()=>{e.target.classList.remove('hidden')
      
 {/*status*/}
 
-<div className={`${status?status:'fixed'} bg-white rounded-xl z-99999999999999 top-50 left-1/2 w-40  h-32 ring-1 ring-black -translate-x-11 flex justify-center flex-wrap p-2`}>
+<div className={`${status?status:'fixed'} bg-white rounded-xl z-99999999999999 md:top-50 xs:top-1/2 left-1/2 w-40  h-32 ring-1 ring-black md:-translate-x-11 xs:-translate-x-20 flex justify-center flex-wrap p-2`}>
 <img src="/Amimoy/check.png" alt="check" />
  <p className="text-xs font-inter text-center">Berhasil Ditambahkan Ke Keranjang</p>
 </div>
@@ -405,10 +410,16 @@ setTimeout(()=>{e.target.classList.remove('hidden')
 
       </section>
       <div
-        className={`fixed   w-full p-10   top-10  w-full z-99999999   rounded-lg  duration-400  ${isHidden ? " -translate-y-180" : ""} `}
+        className={`fixed   w-full p-10   top-10  w-full z-99999999   rounded-lg  duration-400  xs:bg-white  md:bg-transparent ${isHidden ? " -translate-y-180" : ""} `}
       >
+          <span
+            className="bg-red-600 rounded-full h-7 w-7 text-white absolute text-center xs:right-0 xs:-top-4 md:right-2 md:top-6 z-999999999999 md:right-6 hover:cursor-pointer "
+            onClick={() => setIsHidden("hidden")}
+          >
+            x
+          </span>
         <div
-          className={`bg-stone-100 w-full h-120 h-100 relative rounded-xl duration-400  ${isHidden ? " -translate-y-150" : ""} shadow-2xl p-8`}
+          className={`md:bg-stone-100  xs:bg-white w-full h-120 h-120 relative rounded-xl duration-400 overflow-y-scroll ${isHidden ? " -translate-y-150" : ""}  p-8`}
           >
           {product.diskon ? (
             <span
@@ -420,15 +431,9 @@ setTimeout(()=>{e.target.classList.remove('hidden')
           ) : (
             ""
           )}
-          <span
-            className="bg-red-600 rounded-full h-7 w-7 text-white absolute text-center -right-4 -top-4 hover:cursor-pointer "
-            onClick={() => setIsHidden("hidden")}
-          >
-            x
-          </span>
-          <div className="flex w-full justify-between  ">
-            <div className=" md:w-120 md:h-120 xs:w-80 xs:h-80">
-              <img src={"/Amimoy/"+product.urlGambarProduk} alt="item" className="md:h-100 xs:h-60" />
+          <div className="flex w-full justify-between  xs:flex-wrap md:flex-nowrap overflow-y-scroll ">
+            <div className=" md:w-120 md:h-120 xs:w-60 xs:h-60">
+              <img src={"/Amimoy/"+product.urlGambarProduk} alt="item" className="md:h-100 xs:h-50 " />
             </div>
             <div className="w-120 h-120 mt-8">
               <h1 className="font-inter text-2xl">
