@@ -1,9 +1,9 @@
 {
   "name": "safe-project",
+  "homepage": "https://github.com/FadhilSAL/Amimoy",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://github.com/FadhilSAL/Amimoy",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
