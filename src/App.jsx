@@ -67,7 +67,7 @@ export default function App() {
         <div className="flex justify-between mt-3 px-2 " id="menu">
           <div className="flex justify-center flex-wrap w-27 text-center hover:cursor-pointer">
             <img
-              src="/vegetable.png"
+              src="/Amimoy/vegetable.png"
               alt="veget"
               className="w-15 h-15 lg:w-25 lg:h-25"
             />
