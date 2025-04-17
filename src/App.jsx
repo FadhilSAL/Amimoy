@@ -56,7 +56,7 @@ export default function App() {
     <>
       <Navbar cart={cart} setCart={setCart} />
       <section className="xs:mt-7 p-4 lg:mt-4">
-        <div className="bg-[url(/hero-bg-4.jpg)] rounded-xl w-full xs:h-52 md:h-90 bg-cover relative flex text-center  flex-wrap lg:h-100 ">
+        <div className="bg-[url(/Amimoy/hero-bg-4.jpg)] rounded-xl w-full xs:h-52 md:h-90 bg-cover relative flex text-center  flex-wrap lg:h-100 ">
           <h1 className="text-white xs:text-xl md:text-3xl font-semibold w-124 px-4 h-17 text-center tracking-[12px] mt-12 font-oswald w-full">
             AYO BELANJA DISINI{" "}
           </h1>
@@ -160,12 +160,8 @@ return (
         <img src="/icon.png" alt="ikon" className="w-8 h-8" />
         <h1 className="text-2xl font-oswald tracking-widest">Amimoy</h1>
       </div>
-      <div className="w-60 mr-3  flex justify-between">
-      <input
-          type="text"
-          className="w-full focus:outline-none rounded-xl px-4 py-1 shadow-2xl bg-slate-200 hover:bg-white ring-1 ring-slate-300 focus:bg-white"
-          placeholder="Cari produk...  "
-          />
+      <div className="w-60 mr-3  flex justify-end">
+     
         <div id="cart"
           className="w-12 h-10 ml-3  hover:bg-slate-100 hover:cursor-pointer  relative "
           onClick={(e)=>keranjang(e)}
@@ -173,7 +169,7 @@ return (
           <img
             src="/cart.png"
             alt="cart"
-            className="w-12 h-10  hover:opacity-80"
+            className="w-12 h-12  hover:opacity-80"
             />
           <span className={`bg-red-400 text-white rounded-full ${cart.length?'block':'hidden'} w-4 h-4 text-center text-xs absolute top-0 -right-1`}>{cart.length}</span>
         </div>
@@ -435,7 +431,7 @@ setTimeout(()=>{e.target.classList.remove('hidden')
                     src="/cart.png"
                     alt="cartAdd"
                     className="w-13 h-13 hover:cursor-pointer "
-                    onClick={()=>tambahKeranjang(product.id_)}
+                    onClick={(e)=>tambahKeranjang(product.id_,e)}
                   />
                 </div>
                 <p className="font-inter">{product.deskripsi}</p>
