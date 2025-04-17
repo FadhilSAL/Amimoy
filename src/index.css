@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Teko:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@import 'tailwindcss';
+
+
+
+@theme{
+  --font-gothic:"Special Gothic Expanded One", sans-serif;
+  --font-oswald:"Oswald",sans-serif;
+  --breakpoint-xs:320px;
+  --font-rubik:"Rubik Doodle Shadow",system-ui;
+  --font-doto:"Doto",sans-serif;
+  --font-p2:"Press Start 2P" , system-ui;
+  --font-teko:"Teko",system-ui;
+  --font-PT:"PT Sans Narrow",system-ui;
+  --font-inter:"Inter",sans-serif;
+  --animate-go: go 9s forwards;
+  
+  @keyframes go {
+    0%{
+      display:block;
+  
+    }
+    100%{
+     display:hidden;
+    }
+  }
+}
+
+
+
