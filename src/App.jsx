@@ -96,7 +96,7 @@ export default function App() {
               src='/Amimoy/vegetable.png'
               alt="veget"
 
-              className="w-15 h-15 lg:w-25 lg:h-25"
+              className="w-15 h-15 lg:w-25 lg:h-25 active:opacity-50"
               onClick={()=>setMenu('bahan makanan')}
             />
             <p>Bahan Makanan</p>
@@ -105,7 +105,7 @@ export default function App() {
             <img
               src='/Amimoy/tool.png'
               alt="tool"
-              className="w-15 h-15  lg:w-25 lg:h-25"
+              className="w-15 h-15  lg:w-25 lg:h-25 active:opacity-50"
               onClick={()=>setMenu('peralatan')}
             />
             <p className="pb-6">Peralatan</p>
@@ -114,7 +114,7 @@ export default function App() {
             <img
               src="/Amimoy/electronics.png"
               alt="electro"
-              className="w-15 h-15 lg:w-25 lg:h-25"
+              className="w-15 h-15 lg:w-25 lg:h-25 active:opacity-50"
               onClick={()=>setMenu('elektronik')}
               />
             <p className="pb-6">Elektronik</p>
@@ -123,7 +123,7 @@ export default function App() {
             <img
               src="/Amimoy/laundry.png"
               alt="clothes"
-              className="w-15 h-15 lg:w-25 lg:h-25"
+              className="w-15 h-15 lg:w-25 lg:h-25 active:opacity-50"
               onClick={()=>setMenu('pakaian')}
             />
             <p className="pb-6">Pakaian</p>
@@ -269,30 +269,20 @@ function Card({ cart, setCart ,menu , setMenu}) {
   });
 
 const [filtered,setFiltered] = useState('');
-
+const [current,setCurrent] = useState('');
 
 
   useEffect(()=>{
 if(menu == ''){
 
-setFiltered(item)
+setFiltered(item);
+setCurrent(item);
 }
-else if(menu == 'bahan makanan'){
+else if(menu){
   console.log(menu)
 filtrasiItem(menu);
 }
-else if(menu == 'elektronik'){
-  console.log(menu)
-filtrasiItem(menu);
-}
-else if(menu == 'pakaian'){
-  console.log(menu)
-filtrasiItem(menu);
-}
-else if(menu == 'peralatan'){
-  console.log(menu)
-filtrasiItem(menu);
-}
+
 
   },[menu])
 
@@ -300,14 +290,42 @@ filtrasiItem(menu);
 function filtrasiItem(jenis){
 
   const filt = item.filter((itm,i)=>{
-    return itm.jenis == jenis
+    return itm.jenis == jenis 
   })
 
   setFiltered(filt)
-
+  setCurrent(filt)
 
 }
 
+function cariProduk(e){
+
+
+  const filt = item.filter((itm,i)=>{
+    return itm.jenis == menu
+  })
+
+
+  if(!e.target.value){
+   setFiltered(current); //jika input kosong
+  }
+  else if(filt.length == 0 && e.target.value){
+    const itf =  item.filter((itm)=>{
+      return  itm.namaProduk.toLowerCase() == e.target.value.toLowerCase();
+     })
+    setFiltered(itf)
+
+  }
+  else if(filt && e.target.value){
+
+
+  const itf =  filt.filter((itm)=>{
+    return  itm.namaProduk.toLowerCase() == e.target.value.toLowerCase();
+   })
+  setFiltered(itf)
+
+  }
+}
 
 
 
@@ -417,13 +435,15 @@ setTimeout(()=>{
           type="text"
           className="w-1/3 focus:outline-none rounded-xl px-4 py-1 shadow-2xl bg-slate-200 hover:bg-white ring-1 ring-slate-300 focus:bg-white"
           placeholder="Cari produk...  "
+          onChange={(e)=>{cariProduk(e)}}
           />
         </div>
-        <div className="w-full flex flex-wrap mt-12 xs:justify-around  lg:justify-start ">
+    
+        <div className={`w-full flex flex-wrap mt-12 xs:justify-around  lg:justify-start ${filtered?'h-70': 'h-150'}`}>
           {(filtered?filtered:item).map((itm) => {
             return (
               <div
-                className="w-60 rounded-md  ring-1 ring-slate-300 p-4  mb-5 relative lg:mx-7"
+                className="w-60 rounded-md  ring-1 ring-slate-300 p-4  mb-5 relative lg:mx-7 "
                 key={itm.id_}
               >
                 {itm.diskon ? (
