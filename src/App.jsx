@@ -11,6 +11,7 @@ const item = [
     urlGambarProduk: "/tomat.png",
     deskripsi: "Tomat segar untuk bahan masakan anda",
     diskon: "", //masukkan harga setelah diskon misal harga awal 17.000 diskon menjadi 12.000 jika tidak ada diskon boleh dikosongkan
+    jenis:"bahan makanan" //masukkan jenis barang !!!.  ada 4 jenis yaitu bahan makanan,elektronik,peralatan,pakaian
   },
   {
     id_: 2,
@@ -20,6 +21,7 @@ const item = [
     urlGambarProduk: "/wrench2.png",
     deskripsi: "Kunci  adalah alat serbaguna yang digunakan untuk mengencangkan atau melepaskan baut, mur, atau sekrup. Kunci inggris dapat disesuaikan ukurannya dengan ukuran baut atau mur , tersedia nomor 24/27",
     diskon: "",
+    jenis:"peralatan"
   },
   {
     id_: 3,
@@ -30,6 +32,7 @@ const item = [
     deskripsi:
       "Samsung Galaxy J2 Prime adalah smartphone yang dirilis pada tahun 2016. Smartphone ini memiliki layar 5 inci, kamera belakang 8 MP, dan kamera depan 5 MP",
     diskon: "480.000",
+    jenis:'elektronik'
   },
   {
     id_: 4,
@@ -40,12 +43,35 @@ const item = [
     deskripsi:
       "Kaos ini terbuat dari bahan katun asli yang lembut, nyaman dipakai, dan ringan",
     diskon: "",
+    jenis:"pakaian"
+  },
+  {
+    id_: 5,
+    namaProduk: "Bayam",
+    satuan: "Ikat",
+    hargaSatuUnit: "10.000",
+    urlGambarProduk: "/bayam.png",
+    deskripsi:
+      "Bayam segar dari kebunnya langsung",
+    diskon: "",
+    jenis:"bahan makanan"
+  },
+  {
+    id_: 6,
+    namaProduk: "Ayam",
+    satuan: "Ekor",
+    hargaSatuUnit: "45.000",
+    urlGambarProduk: "/ayam.png",
+    deskripsi:
+      "Ayam mentah segar langsung dari kandangnya , untuk bahan lauk dirumah anda !!! ",
+    diskon: "",
+    jenis:"bahan makanan"
   },
 ];
 
 export default function App() {
   const [cart, setCart] = useState([""]);
-
+  const [menu,setMenu] = useState('');
   useEffect(() => {
     const ambilDataLocal = localStorage.getItem('cart')? JSON.parse(localStorage.getItem('cart')):[]
     console.log(cart);
@@ -69,7 +95,9 @@ export default function App() {
             <img
               src='/Amimoy/vegetable.png'
               alt="veget"
+
               className="w-15 h-15 lg:w-25 lg:h-25"
+              onClick={()=>setMenu('bahan makanan')}
             />
             <p>Bahan Makanan</p>
           </div>
@@ -78,6 +106,7 @@ export default function App() {
               src='/Amimoy/tool.png'
               alt="tool"
               className="w-15 h-15  lg:w-25 lg:h-25"
+              onClick={()=>setMenu('peralatan')}
             />
             <p className="pb-6">Peralatan</p>
           </div>
@@ -86,6 +115,7 @@ export default function App() {
               src="/Amimoy/electronics.png"
               alt="electro"
               className="w-15 h-15 lg:w-25 lg:h-25"
+              onClick={()=>setMenu('elektronik')}
               />
             <p className="pb-6">Elektronik</p>
           </div>
@@ -94,12 +124,13 @@ export default function App() {
               src="/Amimoy/laundry.png"
               alt="clothes"
               className="w-15 h-15 lg:w-25 lg:h-25"
+              onClick={()=>setMenu('pakaian')}
             />
             <p className="pb-6">Pakaian</p>
           </div>
         </div>
       </section>
-      <Card cart={cart} setCart={setCart} />
+      <Card cart={cart} setCart={setCart} menu={menu} setMenu={setMenu}/>
     </>
   );
 }
@@ -226,7 +257,7 @@ return (
 
 
 
-function Card({ cart, setCart }) {
+function Card({ cart, setCart ,menu , setMenu}) {
   const [product, setProduct] = useState({
     id_: "",
     namaProduk: "",
@@ -237,10 +268,54 @@ function Card({ cart, setCart }) {
     diskon: "",
   });
 
+const [filtered,setFiltered] = useState('');
+
+
+
+  useEffect(()=>{
+if(menu == ''){
+
+setFiltered(item)
+}
+else if(menu == 'bahan makanan'){
+  console.log(menu)
+filtrasiItem(menu);
+}
+else if(menu == 'elektronik'){
+  console.log(menu)
+filtrasiItem(menu);
+}
+else if(menu == 'pakaian'){
+  console.log(menu)
+filtrasiItem(menu);
+}
+else if(menu == 'peralatan'){
+  console.log(menu)
+filtrasiItem(menu);
+}
+
+  },[menu])
+
+
+function filtrasiItem(jenis){
+
+  const filt = item.filter((itm,i)=>{
+    return itm.jenis == jenis
+  })
+
+  setFiltered(filt)
+
+
+}
+
+
+
+
+
   const [isHidden, setIsHidden] = useState("hidden");
   
 
-const [status , setStatus] = useState("hidden")
+ const [status , setStatus] = useState("hidden")
   
 
 
@@ -313,7 +388,17 @@ setTimeout(()=>{e.target.classList.remove('hidden')
     
   }
 
+function semuaProduk(){
+const element = document.getElementById('redo');
 
+element.classList.add('-rotate-120');
+
+setTimeout(()=>{
+  element.classList.remove('-rotate-120');
+  setMenu('');
+},500)
+
+}
 
 
 
@@ -322,10 +407,11 @@ setTimeout(()=>{e.target.classList.remove('hidden')
   return (
     <>
       <section className="mt-2 p-4 " id="produk">
-        <div className="w-full p-2 flex">
-
+        <div className="w-full p-2 flex relative">
+          {menu? <img src="/Amimoy/return.png " alt="return" className="w-12 h-12 duration-300 hover:cursor-pointer absolute"  id="redo" onClick={semuaProduk}/>:""}
+          
         <h2 className="w-2/3 text-center font-inter text-2xl tracking-widest lg:text-4xl">
-          Semua Produk
+          {menu?menu.toUpperCase():'SEMUA PRODUK'}
         </h2>
         <input
           type="text"
@@ -333,11 +419,11 @@ setTimeout(()=>{e.target.classList.remove('hidden')
           placeholder="Cari produk...  "
           />
         </div>
-        <div className="w-full flex flex-wrap mt-12 justify-around ">
-          {item.map((itm) => {
+        <div className="w-full flex flex-wrap mt-12 xs:justify-around  lg:justify-start ">
+          {(filtered?filtered:item).map((itm) => {
             return (
               <div
-                className="w-60 rounded-md  ring-1 ring-slate-300 p-4  mb-5 relative"
+                className="w-60 rounded-md  ring-1 ring-slate-300 p-4  mb-5 relative lg:mx-7"
                 key={itm.id_}
               >
                 {itm.diskon ? (
@@ -379,7 +465,7 @@ setTimeout(()=>{e.target.classList.remove('hidden')
                 </h2>
                 <div className="flex mt-4 relative">
                   <button
-                    className="rounded-2xl border-1 rounded-xl w-full py-1 font-semibold  text-center text-sm  hover:bg-black hover:text-white hover:cursor-pointer "
+                    className="rounded-2xl border-1 rounded-xl w-full py-1 font-semibold active:bg-black active:text-white text-center text-sm  hover:bg-black hover:text-white hover:cursor-pointer "
                     onClick={() => modalProduct(itm.id_)}
                   >
                     Beli Sekarang
@@ -419,7 +505,7 @@ setTimeout(()=>{e.target.classList.remove('hidden')
             x
           </span>
         <div
-          className={`md:bg-stone-100  xs:bg-white w-full h-120 h-120 relative rounded-xl duration-400 overflow-y-scroll ${isHidden ? " -translate-y-150" : ""}  p-8`}
+          className={`md:bg-stone-100  xs:bg-white w-full h-120 h-120 relative rounded-xl duration-400 xs:overflow-y-scroll md:overflow-hidden ${isHidden ? " -translate-y-150" : ""}  p-8`}
           >
           {product.diskon ? (
             <span
@@ -449,7 +535,7 @@ setTimeout(()=>{e.target.classList.remove('hidden')
                     : product.hargaSatuUnit}
                 </h2>
                 <div className="flex mt-4">
-                  <button className="rounded-2xl border-1 rounded-xl w-full py-1 font-semibold  text-center text-sm  hover:bg-black hover:text-white hover:cursor-pointer">
+                  <button className="rounded-2xl border-1 rounded-xl active:text-white w-full py-1 font-semibold active:bg-black  text-center text-sm  hover:bg-black hover:text-white hover:cursor-pointer">
                     Checkout
                   </button>
                   <img
