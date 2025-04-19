@@ -76,8 +76,7 @@ export default function App() {
     const ambilDataLocal = localStorage.getItem("cart")
       ? JSON.parse(localStorage.getItem("cart"))
       : [];
-    console.log(cart);
-    console.log(ambilDataLocal);
+    
     setCart(ambilDataLocal);
   }, []);
   return (
@@ -331,16 +330,22 @@ function Card({ cart, setCart, menu, setMenu }) {
     let element2;
     if (!isHidden) {//dijalankan ketika kita mengklik "beli sekarang" lalu kita menglik keranjang
       element2 = document.querySelector(el2); //ambil element yang classnya sesuai dengan el2
+      console.log(element2)
+      if(e.target.classList.contains('b'+id)){
+         document.querySelector('.c'+id).classList.add('hidden')
+      }
       if(element){
         element.classList.remove('hidden');
-
+        
         const b2 = document.querySelector('.b'+id);
+        console.log(b2)
         if(b2){
           element2.classList.remove('hidden');
           b2.classList.add('hidden');
+        
         }
        if(e.target.classList.contains('c'+id)){
-        console.log('e');
+        
         e.target.classList.add('hidden');
 
        }
@@ -360,9 +365,9 @@ function Card({ cart, setCart, menu, setMenu }) {
       e.target.classList.remove("hidden");//tampilkan cart lagi setelah 1 detik
       setStatus("hidden");//sembunyikan alert "berhasil ditambahkan ke keranjang" setelah 1 detik
       element.classList.add("hidden");// sembunyikan checklist setelah 1 detik
-      console.log('m1');
+      
       if (!isHidden) {//ketiak modal produk tampil
-        console.log('m2')
+        
         const elem = document.querySelector('.a'+id)
         if(elem){
 
@@ -372,6 +377,10 @@ function Card({ cart, setCart, menu, setMenu }) {
         if(b2){
 
           b2.classList.remove('hidden');
+        }
+         const crt = document.querySelector('.c'+id);
+        if(crt){
+          crt.classList.remove('hidden')
         }
     
       }
