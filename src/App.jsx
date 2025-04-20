@@ -269,7 +269,7 @@ const [total,setTotal] = useState('');
             })
           )}
         </ul>
-        <div className="w-full p-3"><h2 className="text-xxl font-inter">{!total? 'Rp.0':'Rp'+total.toLocaleString("id-Id")}</h2></div>
+        <div className="w-full p-3"><h2 className="text-xxl font-inter">Total : {!total? 'Rp.0':'Rp'+total.toLocaleString("id-Id")}</h2></div>
         <div className="w-full p-4 shadow-2xl flex justify-around">
           <button className="bg-blue-500 text-white px-4 py-1 rounded-md w-1/2 hover:cursor-pointer hover:bg-blue-700 hover:text-slate-200">
             Checkout
