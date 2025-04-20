@@ -137,6 +137,11 @@ export default function App() {
 
 function Navbar({ cart, setCart }) {
   const [isHidden, setIsHidden] = useState(true);
+const [total,setTotal] = useState('');
+
+
+
+
 
   function keranjang() { //ketika keranjang diklik tampilkan sebuah komponen berisi produk yang disimpan ke keranjang
     setIsHidden(!isHidden);
@@ -147,7 +152,19 @@ function Navbar({ cart, setCart }) {
     const toChecked = cart.map((itm) => {
       return { ...itm, checked: true };
     });
-
+    
+    const harga = toChecked.reduce((acc,itm)=>{
+      const hargaNumber = parseInt(itm.harga.toString().replace(/\./g,''));
+     if(itm.checked){
+       return acc + hargaNumber
+     }
+    else{
+    
+      return acc + 0
+    }
+     },0)
+  
+     setTotal(harga)
     setCart(toChecked);
   }
 
@@ -159,6 +176,19 @@ function Navbar({ cart, setCart }) {
       return itm;
     });
 
+
+   const harga = ubahCheck.reduce((acc,itm)=>{
+    const hargaNumber = parseInt(itm.harga.toString().replace(/\./g,''));
+   if(itm.checked){
+     return acc + hargaNumber
+   }
+  else{
+  
+    return acc + 0
+  }
+   },0)
+
+   setTotal(harga)
     setCart(ubahCheck);
   }
 
@@ -169,6 +199,7 @@ function Navbar({ cart, setCart }) {
     });
     localStorage.setItem("cart", JSON.stringify(produkHapus));//simpan produk yang tersisa ke localstorage
     setCart(produkHapus); 
+    setTotal(0);
   }
 
   return (
@@ -238,6 +269,7 @@ function Navbar({ cart, setCart }) {
             })
           )}
         </ul>
+        <div className="w-full p-3"><h2 className="text-xxl font-inter">{!total? 'Rp.0':'Rp'+total.toLocaleString("id-Id")}</h2></div>
         <div className="w-full p-4 shadow-2xl flex justify-around">
           <button className="bg-blue-500 text-white px-4 py-1 rounded-md w-1/2 hover:cursor-pointer hover:bg-blue-700 hover:text-slate-200">
             Checkout
